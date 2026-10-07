@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="ru"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Sherzat или AI?</title>
+<style>
+:root{--bg:#fff;--bg2:#FAFAFA;--ink:#262626;--mute:#8E8E8E;--line:#DBDBDB;--blue:#0095F6;--ok:#1DB954;--bad:#ED4956;--g:linear-gradient(45deg,#FEDA75,#FA7E1E,#D62976,#962FBF,#4F5BD5);box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media(prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#000;--bg2:#121212;--ink:#F5F5F5;--mute:#A8A8A8;--line:#262626}}
+:root[data-theme="dark"]{--bg:#000;--bg2:#121212;--ink:#F5F5F5;--mute:#A8A8A8;--line:#262626}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html,body{height:100%;margin:0}
+body{background:var(--bg);color:var(--ink);font-family:-apple-system,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;overflow-x:hidden}
+#app{max-width:470px;margin:0 auto;min-height:100%;border-left:1px solid var(--line);border-right:1px solid var(--line)}
+header.bar{display:flex;justify-content:space-between;align-items:center;padding:10px 16px;position:sticky;top:env(safe-area-inset-top,0px);background:var(--bg);z-index:5;border-bottom:1px solid var(--line)}
+.logo{font:italic 700 26px "Snell Roundhand","Segoe Script","Brush Script MT",cursive;letter-spacing:.5px}
+svg.i{width:26px;height:26px;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+main{padding-bottom:90px}
+.fade{animation:f .25s both}@keyframes f{from{opacity:0;transform:translateY(8px)}}
+.stories{display:flex;gap:14px;padding:14px 14px 10px;overflow-x:auto;scrollbar-width:none}
+.st{text-align:center;font-size:12px;flex:none;width:68px;cursor:pointer}
+.ring{padding:3px;border-radius:50%;background:var(--g);display:inline-block}
+.ring.grey{background:var(--line)}
+.avi{width:58px;height:58px;border-radius:50%;background:var(--bg);border:3px solid var(--bg);display:grid;place-items:center;font-size:24px;font-weight:700;background:var(--bg2)}
+.ring.sm .avi{width:34px;height:34px;font-size:15px}.ring.sm{padding:2px}
+.post{border-bottom:1px solid var(--line);padding-bottom:12px}
+.ph{display:flex;align-items:center;gap:10px;padding:10px 12px}.ph b{font-size:14px}.ph small{display:block;color:var(--mute);font-size:12px}.ph .d{margin-left:auto;font-weight:700;letter-spacing:2px}
+.media{position:relative;min-height:300px;background:var(--bg2);display:flex;flex-direction:column;justify-content:center;gap:8px;padding:22px 18px;overflow:hidden}
+.media.hero{background:var(--g);color:#fff;align-items:flex-start}
+.media.hero h1{font-size:44px;line-height:1;margin:0;letter-spacing:-1.5px;font-weight:800}
+.media.hero p{margin:6px 0 0;font-size:16px;font-weight:600;opacity:.95}
+.bub{max-width:82%;padding:12px 16px;border-radius:22px;font-size:20px;line-height:1.3;word-break:break-word}
+.bub.c{background:var(--line);align-self:flex-start;font-size:16px;border-bottom-left-radius:6px}
+.bub.m{background:linear-gradient(135deg,#6A3DF0,#B13BD6);color:#fff;align-self:flex-end;border-bottom-right-radius:6px;font-weight:500}
+.pop{position:absolute;left:50%;top:50%;font-size:110px;transform:translate(-50%,-50%) scale(0);pointer-events:none;animation:pop .9s ease both}
+@keyframes pop{0%{transform:translate(-50%,-50%) scale(0)}30%{transform:translate(-50%,-50%) scale(1.25)}50%{transform:translate(-50%,-50%) scale(1)}85%{opacity:1}100%{transform:translate(-50%,-50%) scale(1);opacity:0}}
+.shake{animation:sh .45s}@keyframes sh{20%{transform:translateX(-9px)}40%{transform:translateX(8px)}60%{transform:translateX(-5px)}80%{transform:translateX(3px)}}
+.segs{display:flex;gap:3px;padding:10px 12px 0}.segs i{flex:1;height:3px;border-radius:3px;background:var(--line)}.segs i.on{background:var(--ink)}
+.acts{display:flex;gap:10px;padding:12px}
+.b{flex:1;border:0;border-radius:10px;padding:14px 8px;font:inherit;font-weight:700;font-size:16px;cursor:pointer;background:var(--blue);color:#fff;transition:transform .1s}
+.b:active{transform:scale(.95)}.b.s{background:var(--line);color:var(--ink)}
+.cap{padding:2px 14px;font-size:14px;line-height:1.45}.cap .ok{color:var(--ok)}.cap .no{color:var(--bad)}.cap small{color:var(--mute);display:block;margin-top:4px}
+.warn{margin:10px 12px 0;padding:8px 12px;border-radius:10px;background:#FFF4D6;color:#7A5200;font-size:13px;font-weight:600}
+.prof{display:flex;align-items:center;gap:22px;padding:18px 16px 8px}
+.big{position:relative;width:104px;height:104px;flex:none}.big svg{transform:rotate(-90deg)}
+.big .n{position:absolute;inset:0;display:grid;place-items:center;font-size:26px;font-weight:800}
+.stat{display:flex;flex:1;justify-content:space-around;text-align:center}.stat b{display:block;font-size:19px}.stat span{font-size:13px;color:var(--mute)}
+.bio{padding:6px 16px 12px;font-size:14px;line-height:1.45}.bio b{font-size:15px}
+.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:2px}
+.tile{aspect-ratio:1;background:var(--bg2);display:grid;place-items:center;position:relative;font-size:26px;font-weight:700;cursor:pointer;border:0;color:var(--ink)}
+.tile em{position:absolute;top:6px;right:8px;font-style:normal;font-size:16px}
+.tile.ok em{color:var(--ok)}.tile.no em{color:var(--bad)}.tile.no{background:color-mix(in srgb,var(--bad) 10%,var(--bg2))}.tile.ok{background:color-mix(in srgb,var(--ok) 10%,var(--bg2))}
+.sec{padding:12px 16px;font-weight:700;font-size:15px;border-top:1px solid var(--line)}
+.lb{display:flex;align-items:center;gap:12px;padding:8px 16px;font-size:14px}.lb b{margin-left:auto}
+input{width:calc(100% - 32px);margin:8px 16px;font:inherit;padding:12px 14px;border-radius:10px;border:1px solid var(--line);background:var(--bg2);color:var(--ink);outline:none}
+nav{position:fixed;bottom:0;left:0;right:0;background:var(--bg);border-top:1px solid var(--line);padding-bottom:env(safe-area-inset-bottom,0px);z-index:6}
+nav div{max-width:470px;margin:0 auto;display:flex}nav button{flex:1;border:0;background:none;padding:13px 0;color:var(--mute);cursor:pointer}nav button.on{color:var(--ink)}nav button.on svg{stroke-width:2.8}
+.ov{position:fixed;inset:0;background:rgba(0,0,0,.5);z-index:9;display:flex;align-items:flex-end;justify-content:center;animation:fo .2s}@keyframes fo{from{opacity:0}}
+.sheet{background:var(--bg);width:100%;max-width:470px;border-radius:16px 16px 0 0;padding:10px 20px calc(24px + env(safe-area-inset-bottom,0px));animation:up .28s cubic-bezier(.2,.9,.3,1);max-height:80vh;overflow:auto}@keyframes up{from{transform:translateY(100%)}}
+.grab{width:40px;height:4px;border-radius:4px;background:var(--line);margin:0 auto 14px}
+.toast{position:fixed;top:calc(12px + env(safe-area-inset-top,0px));left:50%;transform:translateX(-50%);background:var(--ink);color:var(--bg);padding:11px 16px;border-radius:12px;font-weight:600;font-size:14px;z-index:20;animation:f .2s both;max-width:90%;text-align:center}
+@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+</style></head><body>
+<div id="app"><header class="bar"><span class="logo" id="lg">sherzat</span><svg class="i" viewBox="0 0 24 24"><path d="M12 21s-7.5-4.6-9.6-9.2A5.6 5.6 0 0 1 12 6.2a5.6 5.6 0 0 1 9.6 5.6C19.5 16.4 12 21 12 21z"/></svg></header><main id="v"></main><nav><div id="nv"></div></nav></div>
+<script>
+const D={
+R:"Азыр келем|Бугун жок|Кой эми|Макул|Эмне кылып жатасын|Кайда жүрөсүн э|Уктайм азыр|Билбейм|Кечинде жазам|Эртең көрөбүз|Тамак жедим|Окууга барам|Акча жок|Чарчадым|Болду э|Ойготпо мени|Эмнеге|Туура айтасын|Щас не могу|Потом отвечу|Да не особо|Го|Ну такое|Пофиг|Давай потом|А че|Сам в шоке|Ахахах ебать|Да бля|Заколебал|Лежу нах|Норм вроде|Не в настроении|Тут скучно|Голодный как собака|Телефон сдох|Пары достали|Зачёт сдал|Интернет лагает|Дождь идёт сенчи|Опять экзамен ебана|Сам не понял|Жатам азыр|Сен кайдасын|Хахахах кандай|Схахахх жок|Ой блин забыл|Не успеваю вообще|Токтот э|Кечирип кой|Кайра башынан|Ушуну карачы|Видео кордунбу|Сенде бар беле|Мага да бер|Бар ошондой|Не, я пас|Мне всё равно|Ладно уговорила|Погнали тогда|Чуть позже|Жарайт|Жакшы эле|Уже еду|Пять минут|Иду иду|Да ладно|Серьёзно что ли|Кимге айттын|Ну ты даёшь|Хз вообще|Чего молчишь|Еле встал|Опять дождь|Завтра рано вставать|Сессия убьёт меня|Не трогай меня сегодня|Окей понял|Мен да ошону ойлодум|Жаман эмес|Тоже не знаю|Ой всё|Не начинай|Сам разберусь|Ахахах жок э ой|Короче потом|Да я дома",
+A:"Эртең жазам азыр уктайм|Лежу сенчи|Не, я уже дома|Азыр бош эмесмин|Кийин сүйлөшөбүз|Мен азыр жолдомун|Бүгүн чарчап калдым|Сенчи эмне кылдың|Кайдан билейин мен|Сейчас занят позже отвечу|Давай завтра обсудим|Я в дороге скоро буду|Что у тебя нового|Нормально вроде|Всё хорошо спасибо|Посмотрим как получится|Не уверен что смогу|Звучит неплохо|Хорошая идея|Сейчас гляну|Я тоже так думаю|Ты права наверное|Жок билбейм|Мындай болбойт|Ахахах да ладно|Ну ты и придумала|Не, ну это уже слишком|Опять ты за своё|Интересно получилось|Давай созвонимся вечером|Я напишу как освобожусь|Хорошо договорились|Спасибо что напомнила|Не переживай всё нормально|Мен түшүндүм|Ооба туура|Бул эң жакшысы|Сен эмне ойлойсун|Бир нерсе болдубу|Не знаю даже что сказать|Устал сегодня сильно|Мне надо подумать|Ладно потом решим|Окей без проблем|Да нет всё в порядке|Хах смешно получилось|Хахахах ну ты даёшь|Ну я так не думаю|Это точно|Буквально только что освободился|Ничего особенного делаю|Просто отдыхаю|Скоро напишу тебе|Чуть позже отвечу|Ну давай попробуем|Не помню если честно|Кандай жакшы экен|Баары жакшы болот|Кеч болуп калды|Мен уйдамын азыр|Эртеңки күнгө калтыралы|Забыл совсем извини|Прости не заметил|Не могу пока сказать|Пока не решил|Скорее всего да|Скорее всего нет|Вроде бы да|Может быть позже|Ну я подумаю|Не против|Согласен с тобой|Мне кажется это хорошо|Честно не знаю|Пожалуй откажусь|Сегодня не получится|Завтра точно смогу|Давай в другой раз|Ничего страшного|Это нормально|Я рядом если что|Дай мне минуту|Отвечу позже обязательно|Хорошего дня тебе|Сладких снов",
+RH:"Ну норм|Ой блин|Жатасынбы|Ну кайф|Не знаю|Ага|Не|Да|Хз|Ну ладно|Давай|Угу|Ну да|Окей",
+AH:"Ну посмотрим|Ахахах жок э|Ага ясно|Потом скажу|Ну да наверное|Ладно|Понял|Ну ок|Да не|Ну посмотрим потом|Ахах ну ок|Ну давай|Мм ладно",
+CR:["Чё делаешь?>>Лежу нах","Пойдём гулять?>>Не в настроении","Ты поел?>>Ооба жедим","Поможешь с докладом?>>Давай потом","Ты спишь?>>Нет курсовую пишу","Почему не отвечал?>>Телефон сдох","Ты видел это?>>Ахахах ебать","Что там по зачёту?>>Сдал сам в шоке","Ну чего ты молчишь?>>А че говорить","Купишь хлеб?>>Окей понял","Увидимся завтра?>>Эртең көрөбүз"],
+CA:["Ты сегодня придёшь?>>Хз посмотрим","Ты где?>>Щас буду","Кечинде бошсунбу?>>Билбейм кечке жазам","Как дела?>>Нормально а у тебя","Идёшь на пары?>>Сегодня не получится","Можешь позвонить?>>Сейчас занят позже наберу","Скинь видео>>Азыр таштайм","Ты придёшь вечером?>>Не знаю пока","Что делаешь?>>Просто отдыхаю","Ты обиделась?>>Нет всё нормально"]};
+const sp=s=>s.split("|"),REAL=[...sp(D.R),...D.CR],AIN=[...sp(D.A),...D.CA],RH=sp(D.RH),AH=sp(D.AH);
+const TOTAL=REAL.length+AIN.length+RH.length+AH.length;
+const RX={okR:["ЕБАТЬ, ты реально его знаешь.","Шерзат бы сейчас одобрил.","Чувствуешь человека."],okA:["Нейросеть не прокатила.","AI старался, но ты не повелась.","Фейк раскрыт."],badR:["Бля… ты не узнала настоящего Шерзата.","Это писал живой человек. Ему обидно.","Не поверила Шерзату. Больно."],badA:["Бля… тебя только что обманула нейросеть.","ИИ только что тебя переиграл 💀","Нейросеть смеётся над тобой."],stk:["Три ошибки подряд. AI уже празднует.","AI пишет в чат: «изи».","Может, ты его вообще не знаешь?"]};
+const MEME=["Ты сейчас серьёзно?","Бля, подумай ещё раз.","AI наблюдает за тобой.","Шерзат бы так не написал. Или написал?"];
+const LV=[[20,"NPC","Вы вообще знакомы?"],[40,"ЗНАКОМЫЙ","Ну имя хотя бы знаешь."],[60,"НОРМАЛЬНО","Иногда попадаешь."],[80,"ХОРОШИЙ ДРУГ","Уже опасно хорошо."],[99,"ШЕРЗАТОЛОГ 🧠","Ты чё, сталкер?"],[100,"ТЫ СЛОМАЛА AI","БЛЯТЬ. Ни один AI не смог тебя обмануть."]];
+const lvl=p=>LV.find(x=>p<=x[0]);
+let P={name:"",attempts:0,best:null,last:null,board:[],seen:[]};
+try{P=Object.assign(P,JSON.parse(localStorage.getItem("sz2")||"{}"))}catch(e){}
+const sv=()=>{try{localStorage.setItem("sz2",JSON.stringify(P))}catch(e){}};
+const S={tab:"home",q:[],i:0,ans:[],done:false,go:false,a:null,stk:0};
+const $=s=>document.querySelector(s),esc=s=>String(s).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c])),rnd=a=>a[Math.floor(Math.random()*a.length)];
+const shuf=a=>a.map(x=>[Math.random(),x]).sort((a,b)=>a[0]-b[0]).map(x=>x[1]);
+const pc=()=>Math.round(S.ans.filter(x=>x.ok).length/15*100);
+const IC={home:'<path d="M3 11l9-8 9 8v10h-6v-6H9v6H3z"/>',test:'<circle cx="11" cy="11" r="7"/><path d="M21 21l-5-5"/>',hist:'<rect x="3" y="3" width="18" height="18" rx="3"/><path d="M3 9h18M9 3v18"/>',me:'<circle cx="12" cy="8" r="4"/><path d="M4 21c1-5 4-7 8-7s7 2 8 7"/>'};
+const ic=n=>`<svg class="i" viewBox="0 0 24 24">${IC[n]}</svg>`;
+function toast(t){const d=document.createElement("div");d.className="toast";d.textContent=t;document.body.appendChild(d);setTimeout(()=>d.remove(),2200)}
+function sheet(h){const o=document.createElement("div");o.className="ov";o.innerHTML='<div class="sheet"><div class="grab"></div>'+h+"</div>";o.onclick=e=>{if(e.target===o)o.remove()};document.body.appendChild(o);return o}
+function take(pool,n){let u=pool.filter(x=>!P.seen.includes(x));if(u.length<n){P.seen=P.seen.filter(x=>!pool.includes(x));u=pool}return shuf(u).slice(0,n)}
+const mk=(a,k,h)=>a.map(s=>{const[c,t]=s.includes(">>")?s.split(">>"):[null,s];return{c,t,a:k,h,key:s}});
+function deck(){const nr=7+(Math.random()<.5?1:0),na=15-nr;
+const n=[...mk(take(REAL,nr-2),"real"),...mk(take(AIN,na-2),"ai")],h=[...mk(take(RH,2),"real",1),...mk(take(AH,2),"ai",1)];
+const d=[...shuf(n),...shuf(h)];P.seen.push(...d.map(x=>x.key));P.seen=P.seen.slice(-300);sv();return d}
+function nav(){$("#nv").innerHTML=[["home","Главная"],["test","Тест"],["hist","Раунды"],["me","Профиль"]].map(x=>`<button class="${S.tab===x[0]?"on":""}" data-t="${x[0]}" aria-label="${x[1]}">${ic(x[0])}</button>`).join("");
+document.querySelectorAll("#nv button").forEach(b=>b.onclick=()=>{S.tab=b.dataset.t;render()})}
+const info={Правила:`<h3>Правила</h3><p>15 сообщений: Шерзат или AI. Последние 4 самые сложные. Каждая игра собирается заново из базы, в ней ${TOTAL} сообщений.</p>`,Рейтинг:()=>`<h3>Рейтинг</h3>${lb()}`,Секрет:`<h3>Секрет</h3><p>Три ошибки подряд, и AI начнёт издеваться. 15 из 15 откроет секретный титул. Тыкай по экрану быстро и увидишь.</p>`,AI:`<h3>Про AI</h3><p>Он изучил, как пишет Шерзат: коротко, без точек, русский вперемешку с кыргызским. Но иногда палится.</p>`};
+const lb=()=>P.board.length?P.board.map((b,i)=>`<div class="lb"><span>${["🥇","🥈","🥉"][i]||"•"}</span>${esc(b.n)}<b>${b.p}%</b></div>`).join(""):'<p class="cap" style="color:var(--mute)">Пока пусто. Пройди тест.</p>';
+function home(){const st=["Правила","Рейтинг","Секрет","AI"].map((n,i)=>`<div class="st" data-s="${n}"><div class="ring"><div class="avi">${["📌","🏆","🔒","🤖"][i]}</div></div><div>${n}</div></div>`).join("");
+return `<div class="stories">${st}</div><article class="post"><div class="ph"><div class="ring sm"><div class="avi">S</div></div><div><b>sherzat.ai</b><small>Новый тест · ${P.name?esc(P.name)+", ":""}это для тебя</small></div><span class="d">•••</span></div>
+<div class="media hero"><h1>Шерзат<br>или AI?</h1><p>Угадай, кто написал сообщение</p></div>
+<div class="acts"><button class="b" id="go">${S.go&&!S.done?"Продолжить":"Начать"}</button></div>
+<div class="cap"><b>sherzat.ai</b> 15 сообщений, а в базе ${TOTAL}. Попробуй дойти до 100%.<small>Лучший результат: ${P.best==null?"ещё нет":P.best+"%"}</small></div></article>`}
+function test(){if(!S.go)return `<div class="cap" style="padding:30px 16px"><b>Тест ещё не начат.</b></div><div class="acts"><button class="b" id="go">Начать</button></div>`;
+if(S.done)return res();const q=S.q[S.i],a=S.a;
+let h=`<div class="segs">${S.q.map((_,k)=>`<i class="${k<S.i||(k===S.i&&a)?"on":""}"></i>`).join("")}</div>${q.h?'<div class="warn">⚠️ Сложный раунд. Угадаешь, значит, реально знаешь Шерзата.</div>':""}
+<article class="post"><div class="ph"><div class="ring sm grey"><div class="avi">?</div></div><div><b>неизвестный</b><small>Раунд ${S.i+1} из 15</small></div><span class="d">•••</span></div>
+<div class="media ${a&&!a.ok?"shake":""}">${q.c?`<div class="bub c">${esc(q.c)}</div>`:""}<div class="bub m">${esc(q.t)}</div>${a?`<div class="pop">${a.ok?"❤️":"💔"}</div>`:""}</div>`;
+if(!a)h+=`<div class="acts"><button class="b" data-p="real">👤 Шерзат</button><button class="b s" data-p="ai">🤖 AI</button></div><div class="cap" style="color:var(--mute)">Источник сообщения скрыт</div>`;
+else{let l=a.ok?rnd(q.a==="real"?RX.okR:RX.okA):rnd(q.a==="real"?RX.badR:RX.badA);if(!a.ok&&S.stk>=3)l=rnd(RX.stk);
+h+=`<div class="acts"><button class="b" id="nx">${S.i===14?"Результат":"Дальше"}</button></div><div class="cap"><b class="${a.ok?"ok":"no"}">${a.ok?"Определено верно ✓":"Ошибка ✕"}</b> Это ${q.a==="real"?"написал Шерзат.":"написал AI."}<br>${l}<small>${a.ok?"+1 правильный ответ":rnd(MEME)}</small></div>`}
+return h+"</article>"}
+function res(){const p=pc(),c=S.ans.filter(x=>x.ok).length,L=lvl(p),R=S.q.map((q,i)=>({q,a:S.ans[i]}));
+const rg=R.filter(x=>x.q.a==="real"&&x.a.ok).length,ag=R.filter(x=>x.q.a==="ai"&&x.a.ok).length,fl=R.filter(x=>x.q.a==="ai"&&!x.a.ok);
+const ex=c===15?"🏆 15/15. Секретный титул: «Ломатель нейросетей».":c===0?"☠️ 0/15. Тебя обманул каждый AI.":"";
+return `<div class="prof"><div class="big"><svg width="104" height="104" viewBox="0 0 104 104"><circle cx="52" cy="52" r="46" fill="none" stroke="var(--line)" stroke-width="7"/><circle id="rg" cx="52" cy="52" r="46" fill="none" stroke="#D62976" stroke-width="7" stroke-linecap="round" stroke-dasharray="289" stroke-dashoffset="289" style="transition:stroke-dashoffset 1.1s cubic-bezier(.2,.8,.2,1)"/></svg><div class="n"><span id="ct">0</span>%</div></div>
+<div class="stat"><div><b>${c}</b><span>верно</span></div><div><b>${15-c}</b><span>ошибок</span></div><div><b>${fl.length}</b><span>обманул AI</span></div></div></div>
+<div class="bio"><b>${L[1]}</b><br>${L[2]}<br>Шерзатов угадано: ${rg}, AI угадано: ${ag}${ex?"<br><b>"+ex+"</b>":""}${fl.length?"<br><span style='color:var(--mute)'>Обманули: «"+esc(fl.slice(0,3).map(x=>x.q.t).join("», «"))+"»</span>":""}</div>
+<div class="acts"><button class="b" id="again">Пройти заново</button></div>${gridH()}`}
+const gridH=()=>`<div class="grid">${S.q.length?S.q.map((q,i)=>{const a=S.ans[i];return `<button class="tile ${a?(a.ok?"ok":"no"):""}" data-i="${i}">${i+1}<em>${a?(a.ok?"✓":"✕"):""}</em></button>`}).join(""):Array(15).fill(0).map((_,i)=>`<button class="tile" data-i="${i}">${i+1}</button>`).join("")}</div>`;
+function hist(){return `<div class="sec">История ответов</div>${gridH()}`}
+function me(){const nm=P.name||"Гость";return `<div class="prof"><div class="ring" style="flex:none"><div class="avi" style="width:84px;height:84px;font-size:34px">${esc(nm[0].toUpperCase())}</div></div><div class="stat"><div><b>${P.attempts}</b><span>попыток</span></div><div><b>${P.best==null?"—":P.best+"%"}</b><span>лучший</span></div><div><b>${P.last==null?"—":P.last+"%"}</b><span>последний</span></div></div></div>
+<div class="bio"><b>${esc(nm)}</b><br>Шерзатология: ${P.last==null?0:P.last} уровень</div><input id="nm" placeholder="Твоё имя" maxlength="20" value="${esc(P.name)}"><div class="acts"><button class="b" id="sn">Сохранить имя</button></div><div class="sec">Рейтинг</div>${lb()}`}
+function start(){if(!P.name){const o=sheet('<h3>Как тебя зовут?</h3><input id="n2" placeholder="Имя" maxlength="20" style="width:100%;margin:8px 0"><div class="acts" style="padding:8px 0"><button class="b" id="ok">Поехали</button></div>');o.querySelector("#ok").onclick=()=>{P.name=o.querySelector("#n2").value.trim()||"Гость";sv();o.remove();begin()}}else begin()}
+function begin(){S.q=deck();S.i=0;S.ans=[];S.done=false;S.go=true;S.a=null;S.stk=0;S.tab="test";render()}
+function render(){const v=$("#v");v.innerHTML=({home,test,hist,me})[S.tab]();v.className="fade";nav();
+v.querySelectorAll("#go").forEach(b=>b.onclick=()=>S.go&&!S.done?(S.tab="test",render()):start());
+v.querySelectorAll("[data-p]").forEach(b=>b.onclick=()=>{const q=S.q[S.i],ok=b.dataset.p===q.a;S.ans.push({ok,p:b.dataset.p});S.stk=ok?0:S.stk+1;S.a={ok};if(S.stk===3)toast("AI начинает издеваться 😈");render()});
+const nx=$("#nx");if(nx)nx.onclick=()=>{S.a=null;if(S.i===14){S.done=true;const p=pc();P.attempts++;P.last=p;P.best=Math.max(P.best||0,p);P.board.push({n:P.name||"Гость",p});P.board.sort((a,b)=>b.p-a.p);P.board=P.board.slice(0,5);sv()}else S.i++;render()};
+const ag=$("#again");if(ag)ag.onclick=start;
+v.querySelectorAll("[data-s]").forEach(b=>b.onclick=()=>{const t=info[b.dataset.s];sheet(typeof t==="function"?t():t)});
+v.querySelectorAll(".tile").forEach(t=>t.onclick=()=>{const i=+t.dataset.i,q=S.q[i],a=S.ans[i];if(!a){toast("Этот раунд ещё не пройден");return}
+sheet(`<h3>Раунд ${i+1} ${a.ok?"✓":"✕"}</h3>${q.c?`<div class="bub c" style="max-width:100%;margin-bottom:8px">${esc(q.c)}</div>`:""}<div class="bub m" style="max-width:100%">${esc(q.t)}</div><p>Это был ${q.a==="real"?"Шерзат":"AI"}. Ты выбрала ${a.p==="real"?"Шерзата":"AI"}.</p>`)});
+const sn=$("#sn");if(sn)sn.onclick=()=>{P.name=$("#nm").value.trim();sv();toast("Имя сохранено");render()};
+const rg=$("#rg");if(rg){const p=pc();requestAnimationFrame(()=>requestAnimationFrame(()=>rg.style.strokeDashoffset=289*(1-p/100)));const t0=performance.now(),el=$("#ct");(function f(t){const k=Math.min(1,(t-t0)/1100);el.textContent=Math.round(p*(1-Math.pow(1-k,3)));if(k<1)requestAnimationFrame(f)})(t0)}}
+let tp=0,tt;document.addEventListener("click",e=>{if(e.target.closest("nav,.b,.tile,.st,input"))return;tp++;clearTimeout(tt);tt=setTimeout(()=>tp=0,1200);if(tp>=7){tp=0;toast("ИИ заметил, что ты тыкаешь 👀")}});
+render();
+</script></body></html>
